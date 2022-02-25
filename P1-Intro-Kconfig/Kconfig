@@ -1,0 +1,16 @@
+config EJEMPLO__I
+	bool "Ejemplo 1programa 'Hola mundo'"
+	default y
+	help
+	Se selecciona el programa del ejemplo 1 
+
+config EJEMPLO__II
+	 bool "Ejemplo 2 programa que usa las funciones printf y scanf"
+	 default n
+	 help
+	 Se selecciona el programa del ejemplo 2 (diapositiva 11)
+
+config EJEMPLO_III
+	 bool "Ejemplo 3 programa que muestra el especificador de formato %li (diapositiva 20)"
+	 default n
+	 help
