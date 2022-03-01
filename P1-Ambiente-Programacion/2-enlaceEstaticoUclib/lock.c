@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <fcntl.h>
-#if 1/LMC 2022.02.07
+#if 1 //LMC 2022.02.07
 #define __USE_XOPEN_EXTENDED
 #include <signal.h>
 #include <stdio.h>
@@ -24,7 +24,7 @@ int main(){
     
     sigset(SIGUSR1, mysig);
     fd = open("myfile", O_WRONLY);
-    lk.1_TYPE = F_WRLCK;
+    lk.l_type = F_WRLCK;
     lk.l_whence = SEEK_SET;
     lk.l_start = 0;
     lk.l_len = 0;
