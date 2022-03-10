@@ -21,6 +21,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-include include/generated/autoconf.h" />
 		</Compiler>
 		<Unit filename="Ejemplo_1.c">
 			<Option compilerVar="CC" />
