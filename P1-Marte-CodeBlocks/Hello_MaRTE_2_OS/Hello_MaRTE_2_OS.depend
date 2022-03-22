@@ -1,0 +1,4 @@
+# depslib dependency file v1.0
+1645587725 source:/home/usuario/myapps/Makefile_para_enlazar_kernel_MaRTE_2/Hello_MaRTE_2_OS/hello_world_c.c
+	<stdio.h>
+
