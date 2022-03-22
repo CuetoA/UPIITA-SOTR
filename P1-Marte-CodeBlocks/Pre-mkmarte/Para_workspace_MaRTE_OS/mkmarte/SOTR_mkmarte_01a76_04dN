@@ -1,0 +1,81 @@
+#!/usr/bin/perl -w
+#
+# MaRTE OS - Make MaRTE libraries
+use strict;
+
+# get MaRTE utils directory 
+use File::Basename;
+use File::Spec;
+my $UTILS_PATH;
+BEGIN {
+    $UTILS_PATH= dirname(File::Spec->rel2abs( __FILE__ ));
+}
+print "\nSOTR_mkmarte_01a76_04dN: \n";
+print "UTILS_PATH=${UTILS_PATH}\n";
+
+# Require local_config.pl
+require "$UTILS_PATH/local_config.pl";
+use vars qw($MPATH %GNAT_VERSION);
+
+# Require current_arch.pl
+require "$UTILS_PATH/current_arch.pl";
+use vars qw($CURRENT_ARCH);
+my $march = $CURRENT_ARCH;
+
+# Require globals.pl
+require "$UTILS_PATH/globals.pl";
+use vars qw(%ARCH_MAKE_OPTS %INCLUDES $GNAT_COMPILE_KERNEL_OPS
+            $MARTE_ADA_SRC_LOCATIONS %COMPILER_PREFIX
+            &exec_command &get_cmd_output);
+
+# Make sure minstall has been executed
+$CURRENT_ARCH ne "none" or 
+    die "ERROR: MaRTE not properly installed (architecture is \"none\")\n" .
+    "   Run minstall before running this script\n";
+
+# RTS should have been created before calling this script
+(is_arch_rts_compiled ($march)) or
+    die "\nError: RTS for the architecture \"$march\" is not compiled yet\n" .
+    "  Run \'mkrtsmarteuc\' for the \"$march\" architecture before running this script.\n";
+
+# compile only kernel? (do not recompile libraries nor C drivers)
+use Getopt::Long;
+Getopt::Long::Configure(qw (pass_through no_auto_abbrev no_ignore_case) );
+my $compile_only_kernel = 0;
+GetOptions("compile_only_kernel" => \$compile_only_kernel);
+
+# directory where object files and libraries are created
+my $OBJ_DIR="$MPATH/lib/";
+
+print "OBJ_DIR=${OBJ_DIR}\n";
+
+# architecture directory
+my $ARCH_DIR="$MPATH/$march" . "_arch";
+
+#----------------------------------------------------------------------------
+# Parameters managment
+my $cflags = "";
+my $gnatflags = "";
+my $found_bargs = 0;
+my $binderflags = "";
+my $arg = "";
+my $gflag = "";
+
+foreach $arg (@ARGV) {
+    if ($arg eq "-bargs")                 { $found_bargs = 1;           next; }
+    if ($found_bargs)                     { $binderflags .= " " . $arg; next; }
+    if ($arg =~ /^-gnat/ || $arg eq "-f") { $gnatflags .= " " . $arg;   next; }
+    if ($arg eq "-g")                     { $binderflags .= " -g";
+                                            $gflag = " -g"; }
+    $cflags .= " " . $arg;
+}
+
+#---------------------------------------------------------------------------
+# Clean the objects directory
+exec_command "mkdir $OBJ_DIR" unless -e $OBJ_DIR;
+#exec_command "rm -f $OBJ_DIR/*.a $OBJ_DIR/*.o"; this line forces recompilation of everything
+
+#----------------------------------------------------------------------------
+# Kernel Ada code compilation
+print "\n - Kernel Ada code compilation...\n";
+

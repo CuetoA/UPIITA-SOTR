@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1645138646 source:/mnt/sda3/Users/LMC/2021/REPOS_2021/2MM4_PROG_AVAN_2021-2/REPO_progavan_2021-2/org_progavan/2021-2/UNIDAD00/01_IntroA_Kconfig/Ejemplo_1.c
+	<stdio.h>
+
+1645241354 source:/home/user/SOTR/01_IntroA_Kconfig/Ejemplo_1.c
+	<stdio.h>
+
+1645824256 source:/home/user/SOTR/01_IntroA_Kconfig/Ejemplo_2.c
+	<stdio.h>
+	"./escanear.h"
+
+1645241354 source:/home/user/SOTR/01_IntroA_Kconfig/Ejemplo_3.c
+	<stdio.h>
+	<limits.h>
+
+1645824322 /home/user/SOTR/01_IntroA_Kconfig/escanear.h
+
+1645241354 source:/home/cuetorra/0-UPIITA/UPIITA-SOTR/P1-Intro-Kconfig/01_IntroA_Kconfig2/Ejemplo_1.c
+	<stdio.h>
+
+1645824256 source:/home/cuetorra/0-UPIITA/UPIITA-SOTR/P1-Intro-Kconfig/01_IntroA_Kconfig2/Ejemplo_2.c
+	<stdio.h>
+	"./escanear.h"
+
+1645824322 /home/cuetorra/0-UPIITA/UPIITA-SOTR/P1-Intro-Kconfig/01_IntroA_Kconfig2/escanear.h
+
+1645241354 source:/home/cuetorra/0-UPIITA/UPIITA-SOTR/P1-Intro-Kconfig/01_IntroA_Kconfig2/Ejemplo_3.c
+	<stdio.h>
+	<limits.h>
+
